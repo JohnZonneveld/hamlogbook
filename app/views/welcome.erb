@@ -1,0 +1,36 @@
+<div class="container">
+  <header><img src="images/radiostationsketch.jpg" class="img-responsive main-image"></header>
+  <div class="col-md-8 col-md-offset-2">
+    <% if is_logged_in? %>
+      <h2>Hello <%= current_user.name %>, welcome to HamLogbook</h2>
+
+      <div class="content">
+        <% if @callsign %>
+          This is your callsign, what do you want to do?
+        
+        
+        <% elsif @callsigns %>
+          Here are your callsigns is displayed, what do you want to do?
+
+        <% else %>
+          <p>You have not added a callsign yet.</p>
+          <a href='/callsigns/new'>Add callsign</a>
+
+        <% end %>
+      </div>
+    <% else %>
+    <br>
+      You have to be logged in to look around
+    <% end %>
+      <div class="sidebar">
+        <% if @user %>
+          <a href="/logout">Logout </a> | <a href="#">View contacts</a>
+        <% else %>
+          <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>
+        
+        
+        <% end %>
+      </div>
+    
+  </div>
+</div>
