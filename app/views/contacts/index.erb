@@ -2,30 +2,34 @@
 <div class="container">
   <header><img src="images/radiostationsketch.jpg" class="img-responsive main-image"></header>
   <div class="col-md-8 col-md-offset-2">
-  
     <% if is_logged_in? %>
-      <h2>Here are your contacts.</h2>
-      <div class="content">
-      <%binding.pry%>
-        <% if current_user.callsigns.length == 1 %>
-          <p>This is your callsign, what do you want to do?</p>
-          <p><a href="/callsigns/<%= current_user.callsigns[0].slug %>">
-          <%=current_user.callsigns[0].name%></a></p>
-          <p><a href='/callsigns/new'>Add another callsign</a></p>
-        <% elsif current_user.callsigns.length > 1 %>
-          <p>These are your callsigns, what do you want to do?</p>
-          <% current_user.callsigns.each do |callsign|%>
-            <p><a href="/callsigns/<%= callsign.slug %>">
-            <%=callsign.name%></a></p>
-          <% end %>
-
-        <% else %>
-         
-          <p>You have not added a callsign yet.</p>
-          <a href='/callsigns/new'>Add callsign</a>
-
-        <% end %>
-      </div>
+        <h2><%=session[:callsign].upcase%> here are your contacts.</h2>
+        <div class="content">
+            <table id="cssTable">
+                <tr>
+                    <th>No.</th>
+                    <th>Date</th> 
+                    <th>Time</th>
+                    <th>Call</th>
+                    <th>Band</th> 
+                    <th>Mode</th>
+                    <th>Grid</th>
+                </tr>
+                <% cs = Callsign.find_by_slug(session[:callsign]) %>
+                <% cs.contacts.each do |contact| %>
+                
+                    <tr>
+                        <td><a href="/contact/<%= contact.id %>"><%= contact.id %></a></td>
+                        <td><%= contact.date %></td>
+                        <td><%= contact.time %></td> 
+                        <td><%= contact.call %></td>
+                        <td><%= contact.band %></td>
+                        <td><%= contact.mode %></td>
+                        <td><%= contact.grid %></td>
+                    </tr>
+                <% end %>
+            </table>
+        </div>
     <% else %>
     <br>
     <h2>Hello, welcome to HamLogbook</h2>
@@ -33,9 +37,11 @@
     <% end %>
       <div class="sidebar">
         <% if !!current_user %>
-          <a href="/logout">Logout </a>
+            <p><a href="/">Home</a></p>
+            <p><a href="/logout">Logout </a></p>
+            <p><a href="/contacts/new">Add new contact</a></p>
         <% else %>
-          <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>
+            <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>
         
         
         <% end %>

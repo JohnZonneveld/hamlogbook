@@ -7,6 +7,7 @@ class ContactsController < ApplicationController
 
   # GET: /contacts/new
   get "/contacts/new" do
+    binding.pry
     erb :"/contacts/new"
   end
 

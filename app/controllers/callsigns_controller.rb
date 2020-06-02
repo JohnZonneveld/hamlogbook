@@ -23,6 +23,7 @@ class CallsignsController < ApplicationController
   # GET: /callsigns/slug
   get "/callsigns/:slug" do
     @callsign = Callsign.find_by_slug(params[:slug])
+    session[:callsign] = params[:slug]
     erb :"/callsigns/show"
   end
 

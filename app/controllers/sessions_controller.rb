@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
 
     get '/logout' do
         session[:user_id] = nil
+        session[:callsign] = nil
         redirect '/'
     end
 
