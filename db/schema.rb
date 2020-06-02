@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200601193231) do
+ActiveRecord::Schema.define(version: 20200602190646) do
 
   create_table "callsigns", force: :cascade do |t|
     t.string  "name"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20200601193231) do
     t.boolean "qsl_send"
     t.boolean "qsl_rcvd"
     t.string  "my_qth"
+    t.text    "callsign_id"
   end
 
   create_table "users", force: :cascade do |t|

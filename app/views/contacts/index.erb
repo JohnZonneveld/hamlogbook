@@ -1,1 +1,45 @@
-<h1>This is the Model's index page.</h1>
+<h1></h1>
+<div class="container">
+  <header><img src="images/radiostationsketch.jpg" class="img-responsive main-image"></header>
+  <div class="col-md-8 col-md-offset-2">
+  
+    <% if is_logged_in? %>
+      <h2>Here are your contacts.</h2>
+      <div class="content">
+      <%binding.pry%>
+        <% if current_user.callsigns.length == 1 %>
+          <p>This is your callsign, what do you want to do?</p>
+          <p><a href="/callsigns/<%= current_user.callsigns[0].slug %>">
+          <%=current_user.callsigns[0].name%></a></p>
+          <p><a href='/callsigns/new'>Add another callsign</a></p>
+        <% elsif current_user.callsigns.length > 1 %>
+          <p>These are your callsigns, what do you want to do?</p>
+          <% current_user.callsigns.each do |callsign|%>
+            <p><a href="/callsigns/<%= callsign.slug %>">
+            <%=callsign.name%></a></p>
+          <% end %>
+
+        <% else %>
+         
+          <p>You have not added a callsign yet.</p>
+          <a href='/callsigns/new'>Add callsign</a>
+
+        <% end %>
+      </div>
+    <% else %>
+    <br>
+    <h2>Hello, welcome to HamLogbook</h2>
+      You have to be logged in to look around
+    <% end %>
+      <div class="sidebar">
+        <% if !!current_user %>
+          <a href="/logout">Logout </a>
+        <% else %>
+          <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>
+        
+        
+        <% end %>
+      </div>
+    
+  </div>
+</div>
