@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20200601193231) do
 
   create_table "callsigns", force: :cascade do |t|
-    t.string  "call"
+    t.string  "name"
     t.boolean "active"
     t.integer "user_id"
     t.string  "gridsquare"

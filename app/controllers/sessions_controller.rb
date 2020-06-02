@@ -27,11 +27,15 @@ class SessionsController < ApplicationController
 
     post '/login' do
         @user = User.find_by(username: params[:username])
-        if @user.authenticate(params[:password])
+        if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
-            erb :welcome
+            redirect to '/'
         else
-            @error = "Something wasn't correct, please try again."
+            if !@user
+                @error = "That username does not exist"
+            else
+                @error = "Something wasn't quite right, please try again."
+            end
             erb :'/sessions/login'
         end
     end

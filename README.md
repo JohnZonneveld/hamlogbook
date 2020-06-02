@@ -1,1 +1,2 @@
-
+# hamlogbook
+Final Sinatra project

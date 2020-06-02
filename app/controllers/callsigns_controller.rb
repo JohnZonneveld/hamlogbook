@@ -17,7 +17,7 @@ class CallsignsController < ApplicationController
     callsign.user_id = current_user.id
     callsign.save
 
-    redirect "/callsigns"
+    erb :welcome
   end
 
   # GET: /callsigns/5

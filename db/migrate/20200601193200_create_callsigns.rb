@@ -1,7 +1,7 @@
 class CreateCallsigns < ActiveRecord::Migration
   def change
     create_table :callsigns do |t|
-      t.string :call
+      t.string :name
       t.boolean :active
       t.integer :user_id
       t.string :gridsquare
