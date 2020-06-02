@@ -1,1 +1,24 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<div class="container">
+  <header><img src="../images/radiostationsketch.jpg" class="img-responsive main-image"></header>
+  <div class="col-md-8 col-md-offset-2">
+  
+    <% if is_logged_in? %>
+        <h2><p>This is the page for your callsign: <%= @callsign.name %></p></h2>
+        <div class="content">
+            <p>Callsign: <%= @callsign.name %></p>
+            <p>Home QTH: <%= @callsign.gridsquare %><p>
+        </div>
+    <% else %>
+        <h2></h2><p><i>You have to be logged in to look around</i></p>
+    <% end %>
+      <div class="sidebar">
+        <% if is_logged_in? %>
+            <p>What do you want to do?</p>
+            <a href="/logout">Logout </a> | <a href="#">View contacts</a> | <a href="/">Home</a>
+        <% else %>
+            <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>
+        <% end %>
+      </div>
+    
+  </div>
+</div>
