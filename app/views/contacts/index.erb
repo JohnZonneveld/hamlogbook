@@ -4,28 +4,28 @@
   <div class="col-md-8 col-md-offset-2">
     <% if is_logged_in? %>
         <h2><%=session[:callsign].upcase%> here are your contacts.</h2>
-        <div class="content">
-            <table id="cssTable">
+        <div class="content"> 
+            <table id="contacts">
                 <tr>
-                    <th>No.</th>
-                    <th>Date</th> 
-                    <th>Time</th>
-                    <th>Call</th>
-                    <th>Band</th> 
-                    <th>Mode</th>
-                    <th>Grid</th>
+                    <th></th>
+                    <th>Worked</th> 
+                    <th>Date/Time</th>
+                    <th>Band</th>
+                    <th>Mode</th> 
+                    <th>Frequency</th>
+                    <th>Country</th>
                 </tr>
                 <% cs = Callsign.find_by_slug(session[:callsign]) %>
-                <% cs.contacts.each do |contact| %>
+                <% cs.contacts.order('date DESC').each do |contact| %>
                 
                     <tr>
-                        <td><a href="/contact/<%= contact.id %>"><%= contact.id %></a></td>
-                        <td><%= contact.date %></td>
-                        <td><%= contact.time %></td> 
+                        <td><a href="/contacts/<%= contact.id %>">Detail</a></td>
                         <td><%= contact.call %></td>
+                        <td><%= contact.date %>&ensp;<%= contact.time %></td>
                         <td><%= contact.band %></td>
                         <td><%= contact.mode %></td>
-                        <td><%= contact.grid %></td>
+                        <td><%= contact.frequency %></td> 
+                        <td><%= contact.country %></td>
                     </tr>
                 <% end %>
             </table>

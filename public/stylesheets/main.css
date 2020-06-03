@@ -63,10 +63,12 @@
     float: left;
     width: 70%; /* 480px / 800px */
   }
-
-  .content tr td {
-    white-space: nowrap;
-    vertical-align: middle;
+  
+  table, th, td {
+    border-collapse: collapse;
+    border: 2px solid #ccc;
+    padding: 2px;
+    text-align: center;
   }
 
   .sidebar {
@@ -122,15 +124,5 @@
     line-height: 24px;
   }
 
-  td 
-{
-    height: 50px; 
-    width: 50px;
 }
 
-#cssTable td 
-{
-    text-align: center; 
-    vertical-align: middle;
-}
-}

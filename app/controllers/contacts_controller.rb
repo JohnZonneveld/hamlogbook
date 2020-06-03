@@ -7,12 +7,15 @@ class ContactsController < ApplicationController
 
   # GET: /contacts/new
   get "/contacts/new" do
-    binding.pry
+
+    @callsign = Callsign.find_by_slug(session[:callsign])
     erb :"/contacts/new"
   end
 
   # POST: /contacts
   post "/contacts" do
+    contact=Contact.create(params[:contact])
+    
     redirect "/contacts"
   end
 
