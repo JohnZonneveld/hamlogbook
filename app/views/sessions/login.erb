@@ -1,5 +1,10 @@
+<div class="container">
+  <header><img src="../../images/radiostationsketch.jpg" class="img-responsive main-image"></header>
+  <div class="col-md-8 col-md-offset-2">
 <h2>Login for access to HamLogbook</h2>
-<a href="/">Home</a> | <a href="#">Log In</a>
+<% if !is_logged_in? %>
+          <a href="/">Home</a> | <a href="/signup">Sign Up </a>
+
 <br><br>
 <% if @error %>
 <i><%= @error %></i>
@@ -13,3 +18,13 @@
     <input type="password" name="password"></p>
     <input type="submit" value="Log In">
 </form></h3>
+
+    <% else %>
+      <a href="/">Home</a> | <a href="/logout">Log Out </a>
+      <br><br>
+      <i>You are already signed in</i>
+        
+        
+    <% end %>
+
+</div>

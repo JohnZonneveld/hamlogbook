@@ -14,6 +14,7 @@ class ContactsController < ApplicationController
 
   # POST: /contacts
   post "/contacts" do
+    cs = Callsign.find_by_slug(session[:callsign])
     contact=Contact.create(params[:contact])
     
     redirect "/contacts"
@@ -21,21 +22,33 @@ class ContactsController < ApplicationController
 
   # GET: /contacts/5
   get "/contacts/:id" do
+    @contact = Contact.find(params[:id])
     erb :"/contacts/show"
   end
 
   # GET: /contacts/5/edit
   get "/contacts/:id/edit" do
+    @callsign = Callsign.find_by_slug(session[:callsign])
+    @contact = Contact.find(params[:id])
     erb :"/contacts/edit"
   end
 
-  # PATCH: /contacts/5
-  patch "/contacts/:id" do
-    redirect "/contacts/:id"
+   # PATCH: /contacts/5
+   patch "/contacts/:id" do
+    contact = Contact.find(params[:id])
+    contact.update(params[:contact])
+    contact.qsl_rcvd = !!params[:contact][:qsl_rcvd]
+    contact.qsl_send = !!params[:contact][:qsl_send]
+    contact.save
+    redirect "/contacts/#{params[:id]}"
   end
 
   # DELETE: /contacts/5/delete
   delete "/contacts/:id/delete" do
+    contact = Contact.find(params[:id])
+    contact.destroy
     redirect "/contacts"
   end
+
+  
 end

@@ -1,14 +1,20 @@
+<div class="container">
+  <header><img src="../../images/radiostationsketch.jpg" class="img-responsive main-image"></header>
+  <div class="col-md-8 col-md-offset-2">
+ 
 <h2>Add a contact</h2>
+<% if is_logged_in?%>
 <a href="/">Home</a> | <a href="/logout">Log Out</a> | <a href="/contacts">Contacts</a>
 <br><br>
- <h3><form method="post" action="/contacts">
- <p><label for="callsign">Callsign: </label>
-    <input type ="text" name="contact[call]">&emsp;
-    <label for="date">Date: </label>
-    <input type ="text" name="contact[date]">&emsp;
-    <label for="time">Time: </label>
-    <input type ="text" name="contact[time]"><br>
-    <label for="mode">Mode: </label>&emsp;&emsp;&emsp;&emsp;
+ <h4><form method="post" action="/contacts">
+ <table>
+ <tr><td><label for="callsign">Callsign: </label>
+    <input type ="text" name="contact[call]"></td>
+    <td><label for="date">Date: </label>
+    <input type ="text" name="contact[date]"></td>
+    <td><label for="time">Time: </label>
+    <input type ="text" name="contact[time]"></td></tr>
+    <tr><td><label for="mode">Mode: </label>
         <select name="contact[mode]">
             <option value="">- Any -</option>
             <option>CW</option>
@@ -71,8 +77,8 @@
             <option>VOI</option>
             <option>WINMOR</option>
             <option>WSPR</option>
-        </select>&emsp;
-    <label for="band">Band: </label>
+        </select>&emsp;</td>
+    <td><label for="band">Band: </label>
         <select name="contact[band]">
             <option value="">- Any -</option>
             <option>2190M</option>
@@ -105,12 +111,12 @@
             <option>2MM</option>
             <option>1MM</option>
             <option>SUBMM</option>
-        </select>
-        <label for="frequency">Frequency: </label>
-    <input type ="text" name="contact[frequency]"><br>
-    <label for="county">County: </label>&emsp;
-    <input type ="text" name="contact[county]">
-    <label for="state">State: </label>
+        </select></td>
+        <td><label for="frequency">Frequency: </label>
+    <input type ="text" name="contact[frequency]"></td></tr>
+    <tr><td><label for="county">County: </label>
+    <input type ="text" name="contact[county]"></td>
+    <td><label for="state">State: </label>
     <select name="contact[state]">
             <option value="">- Any -</option>
             <option>Alabama</option>
@@ -163,8 +169,8 @@
             <option>West Virginia</option>
             <option>Wisconsin</option>
             <option>Wyoming</option>
-        </select>
-    <label for="country">Country: </label>
+        </select></td>
+    <td><label for="country">Country: </label>
         <select name="contact[country]"">
             <option>- Any -</option>
             <option>AFGHANISTAN</option>
@@ -507,14 +513,23 @@
             <option>YEMEN</option>
             <option>ZAMBIA</option>
             <option>ZIMBABWE</option>
-        </select><br>
-    <label for="signal_report">Signal Report: </label>
-        <input type ="text" name="contact[signal_report]">&ensp;
-    <label for="time">Comment: </label>
-        <input type ="text" name="contact[comments]"><br>
-    <label for="myqth">My Grid: </label>&emsp;
-        <input type ="text" name="contact[my_qth]" value="<%=@callsign.gridsquare%>">
+        </select></td></tr>
+    <tr><td><label for="signal_report">Sig/Rep: </label>
+        <input type ="text" name="contact[signal_report]"></td>
+    <td><label for="grid">Grid: </label>
+        <input type ="text" name="contact[grid]"></td>
+    <td><label for="myqth">My Grid: </label>&emsp;
+        <input type ="text" name="contact[my_qth]" value="<%=@callsign.gridsquare%>"></td></tr>
+    </table><br>
+    
+    <label for="comment">Comment: </label><br>
+        <textarea cols="80" rows="10" name="contact[comments]"></textarea><br>
         <input type="hidden" name="contact[callsign_id]" value="<%=@callsign.id%>"><br>
-
     <input type="submit" value="Add Contact">
-</form></h3>
+</form></h4>
+<% else %>
+   
+    <a href="/signup">Sign Up </a> | <a href="/login">Log In</a> <br><br>
+    <i>You don't have acces to this page!</i>
+<% end %>
+</div>

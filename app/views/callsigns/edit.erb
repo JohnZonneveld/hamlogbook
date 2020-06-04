@@ -1,1 +1,15 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<div class="container">
+  <header><img src="../../images/radiostationsketch.jpg" class="img-responsive main-image"></header>
+  <div class="col-md-8 col-md-offset-2">
+<h2>Edit a Callsign</h2>
+<% if is_logged_in?%>
+    <a href="/">Home</a> | <a href="/logout">Log Out</a>
+    <% Callsign.all.each do |callsign| %>
+        <h3><p><%= callsign.call %>&emsp;<%= callsign.gridsquare %> &emsp;<P></h3>
+    <% end%>
+<% else %>
+    <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>
+    <br><br>
+    <i>For this you need to be logged in!</i>   
+<% end %>
+</div>

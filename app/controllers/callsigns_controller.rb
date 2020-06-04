@@ -12,7 +12,6 @@ class CallsignsController < ApplicationController
 
   # POST: /callsigns
   post "/callsigns" do
-    binding.pry
     callsign=Callsign.create(params[:callsign])
     callsign.user_id = current_user.id
     callsign.save
