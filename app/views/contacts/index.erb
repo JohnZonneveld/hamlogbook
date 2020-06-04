@@ -1,35 +1,29 @@
 <h1></h1>
 <div class="container">
   <header><img src="images/radiostationsketch.jpg" class="img-responsive main-image"></header>
-  <div class="col-md-8 col-md-offset-2">
-  
+  <div class="col-md-8 col-md-offset-2"> 
     <% if is_logged_in? %>
         <h2><%=session[:callsign].upcase%> here are your contacts.</h2>
         <div class="content"> 
-        <% if !!current_user %>
-            <p><a href="/">Home</a> | <a href="/contacts/new">Add new contact</a> | <a href="/logout">Logout </a><br><p>
-        <% else %>
-            <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>
-        
-        
-        <% end %>
-        <% cs = Callsign.find_by_slug(session[:callsign]) %>
-        <% binding.pry%>
-        <% if cs.contacts.size != 0%>
-        
-            <table id="contacts">
-                <tr>
-                    <th></th>
-                    <th>Worked</th> 
-                    <th>Date/Time</th>
-                    <th>Band</th>
-                    <th>Mode</th> 
-                    <th>Frequency</th>
-                    <th>Country</th>
-                </tr>
-                
-                <% cs.contacts.order('date DESC').each do |contact| %>
-                
+            <% if !!current_user %>
+                <p><a href="/">Home</a> | <a href="/contacts/new">Add new contact</a> | <a href="/logout">Logout </a><br><p>
+            <% else %>
+                <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>    
+            <% end %>
+            <% cs = Callsign.find_by_slug(session[:callsign]) %>
+            <% binding.pry%>
+            <% if cs.contacts.size != 0%>
+                <table id="contacts">
+                    <tr>
+                        <th></th>
+                        <th>Worked</th> 
+                        <th>Date/Time</th>
+                        <th>Band</th>
+                        <th>Mode</th> 
+                        <th>Frequency</th>
+                        <th>Country</th>
+                    </tr>            
+                    <% cs.contacts.order('date DESC').each do |contact| %>         
                     <tr>
                         <td><a href="/contacts/<%= contact.id %>">Detail</a></td>
                         <td><%= contact.call %></td>
@@ -39,8 +33,8 @@
                         <td><%= contact.frequency %></td> 
                         <td><%= contact.country %></td>
                     </tr>
-                <% end %>
-            </table>
+                    <% end %>
+                </table>
             <% else %>
                 <i>You don't have any contacts entered yet</i>
             <% end %>
@@ -50,7 +44,6 @@
         <h2>Hello, welcome to HamLogbook</h2>
         <a href="/login">Log In</a> | <a href="/signup">Sign Up</a><br><br>
         <i>You have to be logged in to look around</i>
-    <% end %>
-    
+    <% end %> 
   </div>
 </div>

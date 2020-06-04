@@ -1,28 +1,26 @@
 <div class="container">
-  <header><img src="../images/radiostationsketch.jpg" class="img-responsive main-image"></header>
-  <div class="col-md-8 col-md-offset-2">
-  <h2>Add a callsign</h2>
-   
-<% if is_logged_in?%>
-    <a href="/">Home</a> | <a href="/logout">Log Out</a>
-    <br><br>
-    <% if @error %><%= @error %><% end %>
-    <h3>
-    <form method="post" action="/callsigns">
-        <p><label for="callsign">Callsign: </label>
-        <input type ="text" name="callsign[name]">&emsp;
-        <input type="checkbox" name="callsign[active]">&ensp;Active</p>
-        <p><label for="gridsquare">Grid Square: </label>
-        <input type="text" name="callsign[gridsquare]" ></p>
-        <br>
-        <input type="submit" value="Add Callsign">
-    </form></h3>
-
-<% else %>
-    <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>
-    <br><br>
-    <i>For this you need to be logged in!</i>
-        
-        
-<% end %>
+    <header><img src="../images/radiostationsketch.jpg" class="img-responsive main-image"></header>
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Add a callsign</h2>
+        <% if is_logged_in?%>
+            <a href="/">Home</a> | <a href="/logout">Log Out</a>
+            <br><br>
+            <% if @error %><%= @error %><% end %>
+            <h4>
+            <form method="post" action="/callsigns">
+                <p><label for="callsign">Callsign: </label>
+                <input type ="text" name="callsign[name]">&emsp;
+                <input type="checkbox" name="callsign[active]">&ensp;Active</p>
+                <p><label for="gridsquare">GridSquare: </label>
+                <input type="text" name="callsign[gridsquare]" ></p>
+                <br>
+                <input type="submit" value="Add Callsign">
+            </form>
+            </h4>
+        <% else %>
+            <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>
+            <br><br>
+            <i>For this you need to be logged in!</i>      
+        <% end %>
+    </div>
 </div>

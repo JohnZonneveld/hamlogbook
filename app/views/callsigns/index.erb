@@ -1,16 +1,25 @@
 <div class="container">
-  <header><img src="../images/radiostationsketch.jpg" class="img-responsive main-image"></header>
-  <div class="col-md-8 col-md-offset-2">
-<h2>Callsigns</h2>
-<% if is_logged_in?%>
-<%binding.pry%>
-    <a href="/">Home</a> | <a href="/logout">Log Out</a>
-    <% Callsign.all.each do |callsign| %>
-        <h3><p><%= callsign.name %>&emsp;<%= callsign.gridsquare %> &emsp;<P></h3>
-    <% end%>
-<% else %>
-    <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>
-    <br><br>
-    <i>For this you need to be logged in!</i>   
-<% end %>
+    <header><img src="../images/radiostationsketch.jpg" class="img-responsive main-image"></header>
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Callsigns currently registered</h2>
+        <% if is_logged_in?%>
+            <a href="/">Home</a> | <a href="/logout">Log Out</a><br><br>
+            <table>
+                <tr>
+                    <th>Callsign</th>
+                    <th>Gridsquare</th>
+                </tr>
+                <tr>
+                <% Callsign.all.each do |callsign| %>
+                    <h4><tr>
+                        <td><%= callsign.name %></td><td><%= callsign.gridsquare %></td>
+                    </tr></h4>
+                <% end%>
+            </table>
+        <% else %>
+            <a href="/signup">Sign Up </a> | <a href="/login">Log In</a>
+            <br><br>
+            <i>For this you need to be logged in!</i>   
+        <% end %>
+    </div>
 </div>
