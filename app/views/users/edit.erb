@@ -1,1 +1,26 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<div class="container">
+    <header><img src="../../images/radiostationsketch.jpg" class="img-responsive main-image"></header>
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Edit your account</h2>
+        <% if !!current_user%>
+           <a href="/">Home</a> | <a href="/users/<%= current_user.id %>">My account</a> | <a href="/logout">Log Out</a><br><br>
+            <h4>
+            Username: <%= current_user.username %></h4>
+                    <i>This field cannot be changed!</i><br><br>
+    				<form method="post" action="/users/<%=current_user.id%>">
+                    <input type="hidden" name="_method" value="patch">
+    				<p><label for="name">Name: </label>
+    				<input type ="text" name="user[name]" value="<%=current_user.name%>"></p>
+    				<p><label for="password">Password: </label>
+    				<input type="password" name="user[password]"></p>
+    				<p><label for="email">Email: </label>
+                    <input type="text" name="user[email]" value="<%=current_user.email%>"></p>
+    				<input type="submit" value="Save Changes">
+				</form></h4>
+            
+        <% else %>
+            <a href="/login">Log In</a> | <a href="/signup">Sign Up</a><br><br>
+            <i>You must be logged in to view this page</i>
+        <% end %>
+    </div>
+</div>

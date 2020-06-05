@@ -1,1 +1,21 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<div class="container">
+    <header><img src="../../images/radiostationsketch.jpg" class="img-responsive main-image"></header>
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Your account</h2>
+        <% if !!current_user%>
+            <a href="/">Home</a> | <a href="/users/<%= current_user.id %>/edit">Edit</a> | <a href="/logout">Log Out</a><br><br>
+            Name: <%= current_user.name %><br>
+            Username: <%= current_user.username %><br>
+            Email: <%= current_user.email %><br><br>
+
+            To delete your account press the button below
+            <form method="post" action="/users/<%=current_user.id%>/delete">
+            <input type="hidden" id="hidden" name="_method" value="DELETE"><br>
+            <p><input type="submit" value="delete"></p>
+            
+        <% else %>
+            <a href="/login">Log In</a> | <a href="/signup">Sign Up</a><br><br>
+            <i>You must be logged in to view this page</i>
+        <% end %>
+    </div>
+</div>
