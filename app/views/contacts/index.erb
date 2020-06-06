@@ -6,7 +6,7 @@
     <% if is_logged_in? %>
         <h2>Contacts</h2>
         <% if session[:callsign] %>
-            <p><a href="/">Home</a> | <a href="/contacts/new">Add new contact</a> | <a href="/logout">Logout </a> | <a href="contacts/country">Sort by Country</a><br><p>
+            <p><a href="/">Home</a> | <a href="/contacts/new">Add new contact</a> | <a href="/logout">Logout </a><br><p>
             Callsign selected: <%= session[:callsign].upcase %>..
             <% cs = Callsign.find_by_slug(session[:callsign]) %>
             <% contacts = cs.contacts %>
