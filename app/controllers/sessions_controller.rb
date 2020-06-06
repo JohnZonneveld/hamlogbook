@@ -6,10 +6,15 @@ class SessionsController < ApplicationController
 
     post '/signup' do
         if !User.find_by(username: params[:username])
-            @user = User.create(params)
-            session[:user_id] = @user.id
+            if params[:username] == "" || params[:password] == ""
+                @error = "username/password are required fields"
+                erb :'sessions/signup'
+            else
+                @user = User.create(params)
+                session[:user_id] = @user.id
 
-            erb :welcome
+                erb :welcome
+            end
         else
             @error = "username already in use"
             erb :'sessions/signup'
