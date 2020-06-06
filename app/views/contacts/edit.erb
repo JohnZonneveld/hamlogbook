@@ -11,11 +11,11 @@
                 <h3>
                 <tr>
                     <td><label for="callsign">Callsign: </label>
-                    <input type ="text" name="contact[call]" value="<%=@contact.call%>"></td>
+                    <input type ="text" name="contact[call]" value="<%= @contact.call %>"></td>
                     <td><label for="date">Date: </label>
-                    <input type ="text" name="contact[date]" value="<%=@contact.date%>"></td>
+                    <input type ="text" name="contact[date]" value="<%= @contact.date %>"></td>
                     <td><label for="time">Time: </label>
-                    <input type ="text" name="contact[time]" value="<%=@contact.time%>"></td>
+                    <input type ="text" name="contact[time]" value="<%= @contact.time %>"></td>
                 </tr>
                 <tr>
                     <td><label for="mode">Mode: </label>
@@ -117,11 +117,11 @@
                         <option>SUBMM</option>
                     </select></td>
                     <td><label for="frequency">Frequency: </label>
-                    <input type ="text" name="contact[frequency]" value="<%=@contact.frequency%>"></td>
+                    <input type ="text" name="contact[frequency]" value="<%= @contact.frequency %>"></td>
                 </tr>
                 <tr>
                     <td><label for="county">County: </label>
-                    <input type ="text" name="contact[county]" value="<%=@contact.county%>"></td>
+                    <input type ="text" name="contact[county]" value="<%= @contact.county %>"></td>
                     <td><label for="state">State: </label>
                     <select name="contact[state]">
                         <option><%=@contact.state%></option>
@@ -523,28 +523,30 @@
                 </tr>
                 <tr>
                     <td><label for="signal_report">Signal Report: </label>
-                    <input type ="text" name="contact[signal_report]" value="<%=@contact.signal_report%>"></td>
+                    <input type ="text" name="contact[signal_report]" value="<%= @contact.signal_report %>"></td>
                     <td><label for="grid">Grid: </label>&ensp;
-                    <input type ="text" name="contact[grid]" value="<%=@contact.grid%>"></td>
+                    <input type ="text" name="contact[grid]" value="<%= @contact.grid %>"></td>
                     <td><label for="myqth">My Grid: </label>&ensp;
-                    <input type ="text" name="contact[my_qth]" value="<%=@callsign.gridsquare%>"></td>
+                    <input type ="text" name="contact[my_qth]" value="<%= @contact.my_qth %>"></td>
                 </tr>
                 <tr>
                     <td><label for="cqzone">CQZone: </label>&ensp;
-                    <input type ="text" name="contact[grid]" value="<%=@contact.cqzone%>"></td>
+                    <input type ="text" name="contact[cqzone]" value="<%=@contact.cqzone%>"></td>
                     <td><label for="itu">ITU: </label>&ensp;
-                    <input type ="text" name="contact[my_qth]" value="<%=@contact.itu%>"><td>
+                    <input type ="text" name="contact[itu]" value="<%=@contact.itu%>"></td>
+                    <td><label for="iota">IOTA: </label>&ensp;
+                    <input type ="text" name="contact[iota]" value="<%=@contact.iota%>"></td>
                 </tr>
                 <tr>
                     <td><label for="qsl_send">QSL send: </label><input type ="checkbox" name="contact[qsl_send]" 
                     value="<%=@contact.qsl_send%>"<%='checked' if !!@contact.qsl_send %>></td>
-                    <td><label for="qsl_rcvd">QSL received: </label><input type ="checkbox" name="contact[qsl_rcvd]" 
+                    <td><label for="qsl_rcvd">QSL rcvd: </label><input type ="checkbox" name="contact[qsl_rcvd]" 
                     value="<%=@contact.qsl_rcvd%>"<%='checked' if !!@contact.qsl_rcvd %>></td>
                 </tr>
             </table><br>
             <label for="time">Comment: </label><br>
             <textarea cols="80" rows="10" name="contact[comments]" value="<%=@contact.comments%>"></textarea><br>
-            <input type="hidden" name="contact[callsign_id]" value="<%=@callsign.id%>"><br>
+            
             <input type="submit" value="Submit Change">
         </form></h3>
     <% else %>

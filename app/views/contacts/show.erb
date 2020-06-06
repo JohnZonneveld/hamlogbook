@@ -2,52 +2,52 @@
   <header><img src="../images/radiostationsketch.jpg" class="img-responsive main-image"></header>
   <div class="col-md-8 col-md-offset-2">
 <h2>Details:</h2>
-<% if is_logged_in? %>
+<% if !current_user %>
+    <a href="/signup">Sign Up </a> | <a href="/login">Log In</a><br><br>
+    <i>You are not authorized you to view this page</i>
+<% elsif current_user.contacts.include?(@contact) %><br>
     <a href="/">Home </a> | <a href="/contacts/<%=@contact.id%>/edit">Edit</a> | <a href="/logout">Logout </a> 
-
     <br>
-    <% if current_user.id == Callsign.find_by_slug(session[:callsign]).user_id %><br>
     If you want to delete this contacts press the button below:<br><br>
     <form method="post" action="/contacts/<%=@contact.id%>/delete">
-    <input type="hidden" id="hidden" name="_method" value="DELETE">
-    <p><input type="submit" value="delete"></p>
+        <input type="hidden" id="hidden" name="_method" value="DELETE">
+        <p><input type="submit" value="delete"></p>
     </form>
-        <table id="contacts">
-            <tr>
-               <td>Contact id: </td><td><%= @contact.id %></td>
-                <td>Worked: </td><td><%= @contact.call %></td>
-                <td>Date/Time: </td><td><%= @contact.date %>&ensp;<%= @contact.time %></td>
-            </tr>
-            <tr>
-                <td>Mode: </td><td><%= @contact.mode %></td>
-                <td>Band: </td><td><%= @contact.band%></td>
-                <td>Freq.: </td><td><%= @contact.frequency %></td>
-            </tr>
-            <tr>
-                <td>County: </td><td><%= @contact.county %></td>
-                <td>State </td><td><%= @contact.state %></td>
-                <td>Country: </td><td><%= @contact.country %></td>
-            </tr>
-            <tr>
-                <td>Signal Rpt: </td><td><%= @contact.signal_report %></td>
-                <td>Grid: </td><td><%= @contact.grid %></td>
-                <td>My Grid: </td><td><%= @contact.my_qth %></td>
-            </tr>
-            <tr>    
-                <td>CQ Zone: </td><td><%= @contact.cqzone %></td>
-                <td>ITU: </td><td><%= @contact.itu %></td>
-            </tr>
-            <tr>
-                <td>QSL Send: </td><td><% if @contact.qsl_send%> Yes <% else %> No <%end%></td>
-                <td>QSL Rcvd: </td><td><% if @contact.qsl_rcvd%> Yes <% else %> No <%end%></td>
-            </tr>
-        </table><br>            
-        Comments: </td><td><%= @contact.comments %>
-    <% end %>
-   
-<% else %>
-    <a href="/signup">Sign Up </a> | <a href="/login">Log In</a><br><br>
+    <table id="contacts">
+        <tr>
+            <td>Contact id: </td><td><%= @contact.id %></td>
+            <td>Worked: </td><td><%= @contact.call %></td>
+            <td>Date/Time: </td><td><%= @contact.date %>&ensp;<%= @contact.time %></td>
+        </tr>
+        <tr>
+            <td>Mode: </td><td><%= @contact.mode %></td>
+            <td>Band: </td><td><%= @contact.band %></td>
+            <td>Freq.: </td><td><%= @contact.frequency %></td>
+        </tr>
+        <tr>
+            <td>County: </td><td><%= @contact.county %></td>
+            <td>State </td><td><%= @contact.state %></td>
+            <td>Country: </td><td><%= @contact.country %></td>
+        </tr>
+        <tr>
+            <td>Signal Rpt: </td><td><%= @contact.signal_report %></td>
+            <td>Grid: </td><td><%= @contact.grid %></td>
+            <td>My Grid: </td><td><%= @contact.my_qth %></td>
+        </tr>
+        <tr>    
+            <td>CQ Zone: </td><td><%= @contact.cqzone %></td>
+            <td>ITU: </td><td><%= @contact.itu %></td>
+            <td>IOTA: </td><td><%= @contact.iota %></td>
+        </tr>
+        <tr>
+            <td>QSL Send: </td><td><% if @contact.qsl_send%> Yes <% else %> No <%end%></td>
+            <td>QSL Rcvd: </td><td><% if @contact.qsl_rcvd%> Yes <% else %> No <%end%></td>
+        </tr>
+    </table><br>            
+    Comments: </td><td><%= @contact.comments %>
+<% elsif is_logged_in? %>
+        <a href="/">Home </a> | <a href="/logout">Log Out</a><br><br>
+        <i>You are not authorized you to view this page</i>
 
-    <i>You are not authorized you to view this page</i>
 <% end%>
 </div>

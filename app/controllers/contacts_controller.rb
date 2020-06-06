@@ -32,7 +32,8 @@ class ContactsController < ApplicationController
   	end
 
    	# PATCH: /contacts/5
-   	patch "/contacts/:id" do
+	   patch "/contacts/:id" do
+		binding.pry
     	contact = Contact.find(params[:id])
     	contact.update(params[:contact])
     	contact.qsl_rcvd = !!params[:contact][:qsl_rcvd]
