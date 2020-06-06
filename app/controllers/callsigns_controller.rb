@@ -38,7 +38,6 @@ class CallsignsController < ApplicationController
 		@callsign.update(params[:callsign])
 		@callsign.active = !!params[:callsign][:active]
 		@callsign.save
-		binding.pry
     	redirect "/callsigns/#{@callsign.slug}"
   	end
 
