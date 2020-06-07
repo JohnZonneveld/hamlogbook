@@ -5,11 +5,6 @@ class UsersController < ApplicationController
     	erb :"/users/index"
   	end
 
-  	# POST: /users
-  	post "/users" do
-    	redirect "/users"
-  	end
-
 	# GET: /users/5/edit
   	get "/users/:id/edit" do
     	erb :"/users/edit"
