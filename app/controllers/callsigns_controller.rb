@@ -12,11 +12,13 @@ class CallsignsController < ApplicationController
 
   	# POST: /callsigns
   	post "/callsigns" do
-    	callsign=Callsign.create(params[:callsign])
-    	callsign.user_id = current_user.id
-    	callsign.save
-
-    	erb :welcome
+    	callsign=current_user.callsigns.build(params[:callsign])
+		if callsign.save
+			erb :welcome
+		else
+			@error = "Callsign is required"
+			erb :"/callsigns/new"
+		end
   	end
 
   	# GET: /callsigns/slug
@@ -27,9 +29,15 @@ class CallsignsController < ApplicationController
   	end
 
   	# GET: /callsigns/slug/edit
-  	get "/callsigns/:slug/edit" do
+	get "/callsigns/:slug/edit" do
 		@callsign = Callsign.find_by_slug(params[:slug])
-    	erb :"/callsigns/edit"
+		if current_user.id == @callsign.user_id
+			erb :"/callsigns/show"
+		else
+			@error="You are not authorized to view that page"
+			# redirect '/'
+			erb :welcome
+		end
   	end
 
   	# PATCH: /callsigns/slug

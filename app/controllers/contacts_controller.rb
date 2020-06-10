@@ -26,9 +26,14 @@ class ContactsController < ApplicationController
 
   	# GET: /contacts/5/edit
   	get "/contacts/:id/edit" do
-    	@callsign = Callsign.find_by_slug(session[:callsign])
-    	@contact = Contact.find(params[:id])
-    	erb :"/contacts/edit"
+		@callsign = Callsign.find_by_slug(session[:callsign])
+		if current_user.id == @callsign.user_id
+    		@contact = Contact.find(params[:id])
+			erb :"/contacts/edit"
+		else
+			@error = "You are not authorized to view this page"
+			erb :"/contact/:id"
+		end
   	end
 
    	# PATCH: /contacts/5
