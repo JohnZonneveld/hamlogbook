@@ -13,10 +13,9 @@
         <% elsif current_user.callsigns.length > 1 %>
 
             <p>Here are your callsigns, view all your contacts or choose a callsign to modify it or to view only contacts made with that callsign</p>
-            <% session[:callsign] = nil %>
             <p>View all my <a href="/contacts">contacts</a></p>
             <% current_user.callsigns.each do |callsign|%>
-                <p><a href="/callsigns/<%= callsign.slug %>">
+                <p><a href="/callsigns/<%= callsign.id %>">
                 <%=callsign.name%></a></p>
             <% end %>
         <% else %>
@@ -32,11 +31,5 @@
         <p>Signup to create an account to look around.</p>
     <% end %>
 
-        
-          
-        
-        
-
-    
   </div>
 </div>

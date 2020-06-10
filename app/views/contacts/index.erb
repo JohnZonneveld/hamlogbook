@@ -1,20 +1,17 @@
 <h1></h1>
 <div class="container">
   <div class="col-md-8 col-md-offset-2"> 
-  
+
     <% if is_logged_in? %>
         <h2>Contacts</h2>
-        <% if session[:callsign] %>
+        <% if session[:callsign_id] %>
             <p><a href="/">Home</a> | <a href="/contacts/new">Add new contact</a> | <a href="/logout">Logout </a><br><p>
-            Callsign selected: <%= session[:callsign].upcase %>..
-            <% cs = Callsign.find_by_slug(session[:callsign]) %>
-            <% contacts = cs.contacts %>
+            Callsign selected: <%= @callsign.name %>
         <% else %>
             <p><a href="/">Home</a> | <a href="/logout">Logout </a><br><p>
             <i>To add a new contact please first select a callsign on the <a href="/">homepage</a>
-            <% contacts = current_user.contacts %>
         <% end %>
-        <% if contacts.size != 0 %>
+        <% if @contacts.size != 0 %>
             <table id="contacts">
                 <tr>
                     <th></th>
@@ -25,7 +22,7 @@
                     <th>Frequency</th>
                     <th>Country</th>
                 </tr>            
-                <% contacts.order('date DESC').each do |contact| %>         
+                <% @contacts.each do |contact| %>         
                 <tr>
                     <td><a href="/contacts/<%= contact.id %>">Detail</a></td>
                     <td><%= contact.call %></td>

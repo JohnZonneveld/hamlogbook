@@ -7,6 +7,10 @@
 <% elsif current_user.contacts.include?(@contact) %><br>
     <a href="/">Home </a> | <a href="/contacts/<%=@contact.id%>/edit">Edit</a> | <a href="/logout">Logout </a> 
     <br>
+    <% if @error %>
+        <%= @error %>
+    <% end %>
+    <br>
     If you want to delete this contacts press the button below:<br><br>
     <form method="post" action="/contacts/<%=@contact.id%>/delete">
         <input type="hidden" id="hidden" name="_method" value="DELETE">

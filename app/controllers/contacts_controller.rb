@@ -1,19 +1,25 @@
 class ContactsController < ApplicationController
 
   	# GET: /contacts
-  	get "/contacts" do
+	get "/contacts" do
+		if !!session[:callsign_id]
+			@contacts = current_user.contacts.where(callsign_id: session[:callsign_id])
+			@callsign = Callsign.find(session[:callsign_id])
+		else
+			@contacts = current_user.contacts
+		end
     	erb :"/contacts/index"
   	end
 
   	# GET: /contacts/new
   	get "/contacts/new" do
-    	@callsign = Callsign.find_by_slug(session[:callsign])
+    	@callsign = Callsign.find(session[:callsign_id])
     	erb :"/contacts/new"
   	end
 
   	# POST: /contacts
   	post "/contacts" do
- 	   	cs = Callsign.find_by_slug(session[:callsign])
+ 	   	cs = Callsign.find(session[:callsign_id])
     	contact=Contact.create(params[:contact])
     redirect "/contacts"
   	end
@@ -25,14 +31,15 @@ class ContactsController < ApplicationController
   	end
 
   	# GET: /contacts/5/edit
-  	get "/contacts/:id/edit" do
-		@callsign = Callsign.find_by_slug(session[:callsign])
-		if current_user.id == @callsign.user_id
+	  get "/contacts/:id/edit" do
+		binding.pry
+		@contact = Contact.find(params[:id])
+		if @contact.callsign_id == session[:callsign_id]
     		@contact = Contact.find(params[:id])
 			erb :"/contacts/edit"
 		else
 			@error = "You are not authorized to view this page"
-			erb :"/contact/:id"
+			erb :"/contacts/"
 		end
   	end
 
@@ -48,9 +55,11 @@ class ContactsController < ApplicationController
 
   	# DELETE: /contacts/5/delete
   	delete "/contacts/:id/delete" do
-    	contact = Contact.find(params[:id])
-    	contact.destroy
-    	redirect "/contacts"
+		contact = Contact.find(params[:id])
+		if @contact.callsign_id == session[:callsign_id]
+			contact.destroy
+		end
+			redirect "/contacts"
   	end
   
 end

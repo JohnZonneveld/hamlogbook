@@ -10,6 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    session[:callsign_id] = nil
     erb :welcome
   end
 
