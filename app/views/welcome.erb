@@ -2,12 +2,12 @@
     <div class="col-md-8 col-md-offset-2">
   
     <% if is_logged_in? %>
-        <h2>Hello <%= current_user.name %>, welcome.</h2>
+        <h2>Hello <%= current_user.username %>, welcome.</h2>
           <a href='/users/<%=current_user.id%>'>My account</a> | <a href='/callsigns/new'>Add callsign</a> | <a href="/logout">Logout</a><br><br>
         <div class="content">
         <% if current_user.callsigns.length == 1 %>
             <p>Choose a callsign</p>
-            <p><a href="/callsigns/<%= current_user.callsigns[0].slug %>">
+            <p><a href="/callsigns/<%= current_user.callsigns[0].id %>">
             <%=current_user.callsigns[0].name%></a></p>
             <p><a href='/callsigns/new'>Add another callsign</a></p>
         <% elsif current_user.callsigns.length > 1 %>

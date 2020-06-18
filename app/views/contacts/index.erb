@@ -6,7 +6,7 @@
         <h2>Contacts</h2>
         <% if session[:callsign_id] %>
             <p><a href="/">Home</a> | <a href="/contacts/new">Add new contact</a> | <a href="/logout">Logout </a><br><p>
-            Callsign selected: <%= @callsign.name %>
+             Callsign selected: <%= @callsign.name %><br>
         <% else %>
             <p><a href="/">Home</a> | <a href="/logout">Logout </a><br><p>
             <i>To add a new contact please first select a callsign on the <a href="/">homepage</a>

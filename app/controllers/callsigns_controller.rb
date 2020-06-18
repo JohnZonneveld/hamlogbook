@@ -10,6 +10,12 @@ class CallsignsController < ApplicationController
     	erb :"/callsigns/new"
   	end
 
+	get "/callsigns/:id/contacts" do
+		@contacts = Contact.all.where(callsign_id: params[:id])
+		@callsign = Callsign.find(params[:id])
+		erb :"/contacts/index"
+	end 	
+
   	# POST: /callsigns
   	post "/callsigns" do
     	callsign=current_user.callsigns.build(params[:callsign])

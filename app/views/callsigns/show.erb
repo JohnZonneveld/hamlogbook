@@ -3,7 +3,7 @@
 	<div class="col-md-8 col-md-offset-2">
 		<h2>Callsign: <%= @callsign.name %></h2>
 		<% if current_user.id == @callsign.user_id%>
-			<a href="/">Home</a> | <a href="/callsigns/<%=@callsign.slug%>/edit">Edit</a> | <a href="/contacts">View contacts</a> | <a href="/logout">Logout </a>
+			<a href="/">Home</a> | <a href="/callsigns/<%=@callsign.slug%>/edit">Edit</a> | <a href=<%= "/callsigns/#{@callsign.id}/contacts"%>>View contacts</a> | <a href="/logout">Logout </a>
 			<br><br>
 			If you want to delete this callsign press the button below
 			<form method="post" action="/callsigns/<%=@callsign.id%>/delete">

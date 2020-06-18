@@ -2,12 +2,15 @@ class ContactsController < ApplicationController
 
   	# GET: /contacts
 	get "/contacts" do
-		if !!session[:callsign_id]
-			@contacts = current_user.contacts.where(callsign_id: session[:callsign_id])
-			@callsign = Callsign.find(session[:callsign_id])
+		if !!@callsign
+			binding.pry
+			@contacts = @callsign.contacts
+			# @contacts = current_user.contacts.where(callsign_id: session[:callsign_id])
+			# @callsign = Callsign.find(session[:callsign_id])
 		else
 			@contacts = current_user.contacts
 		end
+		@callsign = Callsign.find(session[:callsign_id])
     	erb :"/contacts/index"
   	end
 
@@ -19,9 +22,8 @@ class ContactsController < ApplicationController
 
   	# POST: /contacts
   	post "/contacts" do
- 	   	cs = Callsign.find(session[:callsign_id])
     	contact=Contact.create(params[:contact])
-    redirect "/contacts"
+    	redirect '/contacts'
   	end
 
   	# GET: /contacts/5
@@ -56,7 +58,8 @@ class ContactsController < ApplicationController
   	# DELETE: /contacts/5/delete
   	delete "/contacts/:id/delete" do
 		contact = Contact.find(params[:id])
-		if @contact.callsign_id == session[:callsign_id]
+		binding.pry
+		if contact.callsign_id == session[:callsign_id]
 			contact.destroy
 		end
 			redirect "/contacts"

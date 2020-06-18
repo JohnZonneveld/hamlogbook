@@ -1,5 +1,5 @@
 class Callsign < ActiveRecord::Base
-    has_many :contacts
+    has_many :contacts, dependent: :destroy
     belongs_to :user
     validates :name, presence: :true
 
