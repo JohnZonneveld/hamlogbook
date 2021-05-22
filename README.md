@@ -7,7 +7,7 @@ User can edit the user, except for the username field. User can delete his profi
 
 To use this application:
 
-Go to https://github.com/raspimeteo/hamlogbook<br>
+Go to https://github.com/johnzonneveld/hamlogbook<br>
 Click the 'Clone or Download' button<br>
 Copy the link<br>
 In Command Line or Git Bash, type 'git clone ' then paste the URL<br>
